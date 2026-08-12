@@ -1,1 +1,76 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JWS Masjid ARAFAH</title><link rel="stylesheet" href="style.css"></head><body><div id="app"></div><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JWS Masjid ARAFAH — Admin</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="mosque">🕌</div><div><b>JWS</b><span>Jam Masjid Digital</span></div></div>
+  <div class="menu-title">MENU UTAMA</div>
+  <nav id="nav"></nav>
+  <div class="tv-preview">
+    <div class="preview-title">PREVIEW LAYAR TV</div>
+    <div class="tv-card">
+      <div class="tv-mini-head">MASJID ARAFAH</div>
+      <div class="tv-mini-title">RUKUK BERSAMA<br>ORANG-ORANG YANG RUKUK</div>
+      <div class="tv-mini-clock" id="miniClock">15:48:25</div>
+      <div class="tv-mini-times"><span>04:29</span><span>04:39</span><span>11:52</span><span>15:13</span><span>17:48</span><span>19:00</span></div>
+    </div>
+    <button class="tv-open" onclick="window.open('tv.html','_blank')">Buka Layar TV ↗</button>
+  </div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div class="top-date"><b id="dateNow"></b><span id="hijri">08 Safar 1448 H</span></div>
+  <div class="top-user"><span class="bell">♧<i>3</i></span><div class="avatar">A</div><div><b>Admin Masjid</b><small>Super Admin</small></div><span>⌄</span></div>
+</header>
+
+<section class="content">
+  <div class="page-head">
+    <div><h1 id="pageTitle">Dashboard</h1><p>Selamat datang di Admin Panel JWS Masjid ARAFAH Kranji Munthang</p></div>
+    <div class="head-actions"><button class="btn green" onclick="openPage('announcement')">＋ Tambah Pengumuman</button><button class="btn blue" onclick="openPage('slides')">＋ Tambah Slide</button><button class="btn" onclick="openPage('settings')">⚙ Pengaturan</button></div>
+  </div>
+
+  <div id="pages">
+    <section class="page active" data-page="dashboard">
+      <div class="stats">
+        <div class="stat greenish"><div class="stat-icon">⚑</div><div><b>5</b><span>Pengumuman Aktif</span><a onclick="openPage('announcement')">Lihat semua</a></div></div>
+        <div class="stat blueish"><div class="stat-icon">▣</div><div><b>12</b><span>Jumlah Slide</span><a onclick="openPage('slides')">Lihat semua</a></div></div>
+        <div class="stat purpleish"><div class="stat-icon">T</div><div><b>Running Text</b><span class="activeText">Aktif</span><a onclick="openPage('running')">Lihat pengaturan</a></div></div>
+        <div class="stat yellowish"><div class="stat-icon">♟</div><div><b>6</b><span>Imam & Muadzin</span><a onclick="openPage('imam')">Lihat semua</a></div></div>
+        <div class="stat greenish"><div class="stat-icon">◷</div><div><b>10 Menit</b><span>Waktu Iqamah</span><a onclick="openPage('iqamah')">Lihat pengaturan</a></div></div>
+      </div>
+      <div class="three-col">
+        <div class="panel"><div class="panel-head">⚑ &nbsp; Pengumuman Terbaru <button class="small-btn">Lihat Semua</button></div><div class="rows">${["Kajian Rutin Ahad Pagi","Pembangunan Tempat Wudhu","Donasi untuk Kegiatan Masjid","Libur Sekretariat Masjid","Terima Kasih Donatur"].map((x,i)=>`<div class="row"><div><span class="dot"></span><b>${x}</b><small>${i<4?"03 Agustus 2026 - 10 Agustus 2026":"01 Juli 2026 - 31 Juli 2026"}</small></div><em class="${i===4?"done":""}">${i===4?"Selesai":"Aktif"}</em></div>`).join("")}</div></div>
+        <div class="panel"><div class="panel-head">▣ &nbsp; Slide Aktif <button class="small-btn">Lihat Semua</button></div><div class="rows">${["Jadwal Sholat","Ayat Al-Quran","Hadits","Donasi Masjid","Kegiatan Masjid"].map((x,i)=>`<div class="slide-row"><b>${i+1}</b><div class="thumb"></div><div><b>${x}</b><small>Durasi 15 detik</small></div><em>Aktif</em><span>☷</span></div>`).join("")}</div></div>
+        <div class="panel"><div class="panel-head">⚙ &nbsp; Informasi Sistem</div><div class="info">${[["Versi Aplikasi","v2.1.0"],["Terakhir Update Jadwal","03 Agustus 2026 00:15"],["Sumber Jadwal","KEMENAG API"],["Lokasi","Kranji Munthang"],["Resolusi Layar TV","1920 × 1080"],["Status Layar TV","Online"],["Waktu Server","15:48:25 WIB"]].map(x=>`<div><span>${x[0]}</span><b class="${x[0]==="Status Layar TV"?"online":""}">${x[1]}</b></div>`).join("")}</div></div>
+      </div>
+      <div class="lower-grid">
+        <div class="panel form-panel"><div class="section-title">Pengumuman <span>›</span> Tambah Pengumuman</div><div class="form"><label>Judul Pengumuman</label><input placeholder="Contoh: Kajian Rutin Ahad Pagi"><div class="split"><div><label>Isi Pengumuman</label><textarea>Disampaikan kepada seluruh jamaah untuk mengikuti kajian yang akan dilaksanakan setiap hari Ahad pagi setelah sholat Subuh.</textarea></div><div><label>Tanggal Mulai</label><input type="date" value="2026-08-03"><label>Tanggal Berakhir</label><input type="date" value="2026-08-10"><label>Prioritas</label><select><option>🔴 Tinggi</option><option>Sedang</option><option>Rendah</option></select><label class="check"><input type="checkbox" checked> Tampilkan di Running Text</label></div></div><div class="form-buttons"><button class="btn">Batal</button><button class="btn green">💾 Simpan</button></div></div></div>
+        <div class="panel table-panel"><div class="section-title">Slide TV <span>›</span> Daftar Slide <button class="small-btn">☷ Urutkan Slide</button></div><div class="table-head"><button class="btn green">＋ Tambah Slide</button></div><table><thead><tr><th>No</th><th>Preview</th><th>Judul Slide</th><th>Jenis</th><th>Durasi</th><th>Status</th><th>Aksi</th></tr></thead><tbody>${["Jadwal Sholat","Ayat Al-Quran","Hadits","Donasi Masjid","Kegiatan Masjid"].map((x,i)=>`<tr><td>${i+1}</td><td><div class="thumb"></div></td><td>${x}</td><td>Gambar</td><td>15 detik</td><td><em>Aktif</em></td><td><button class="icon bluebg">✎</button><button class="icon redbg">⌫</button></td></tr>`).join("")}</tbody></table><small class="table-foot">Menampilkan 1–5 dari 12 data</small></div>
+        <div class="panel edit-panel"><div class="section-title">Slide TV <span>›</span> Tambah / Edit Slide</div><div class="form"><div class="split"><div><label>Jenis Slide</label><select><option>Gambar</option><option>Video</option></select></div><div><label>Durasi Tampil</label><select><option>15 Detik</option><option>30 Detik</option><option>60 Detik</option></select></div></div><div class="split"><div><label>Judul Slide</label><input value="Kegiatan Masjid"></div><div><label>Urutan Slide</label><input value="5"></div></div><label>Upload Gambar</label><div class="upload"><div class="upload-preview">KEGIATAN<br>MASJID ARAFAH</div><button class="btn">↗ Ganti Gambar</button><button class="delete">♧</button></div><div class="split"><div><label>Transisi</label><select><option>Fade</option><option>Slide</option><option>Zoom</option></select></div><div><label>Warna</label><div class="color-field"><span></span>#0E6B3D</div></div></div><label class="toggle-row">Status <input type="checkbox" checked><span class="toggle"></span> Aktif</label><div class="form-buttons"><button class="btn">Batal</button><button class="btn green">💾 Simpan</button></div></div></div>
+      </div>
+    </section>
+
+    <section class="page" data-page="prayer"><div class="simple-panel"><h2>Jadwal Sholat</h2><p>Atur jadwal sholat Masjid ARAFAH Kranji Munthang.</p><div class="prayer-form" id="prayerForm"></div><button class="btn green" onclick="savePrayer()">💾 Simpan Jadwal</button></div></section>
+    <section class="page" data-page="announcement"><div class="simple-panel"><h2>Pengumuman</h2><label>Isi Pengumuman</label><textarea id="annText" rows="8"></textarea><br><button class="btn green" onclick="saveAnn()">💾 Simpan Pengumuman</button></div></section>
+    <section class="page" data-page="slides"><div class="simple-panel"><h2>Slide TV</h2><p>Kelola urutan dan konten slide layar TV.</p><button class="btn green">＋ Tambah Slide</button></div></section>
+    <section class="page" data-page="iqamah"><div class="simple-panel"><h2>Iqamah</h2><p>Atur jeda iqamah setelah adzan.</p><div class="iq-grid">${["Subuh","Dzuhur","Ashar","Maghrib","Isya"].map(x=>`<label>${x}<input type="number" value="10"> menit</label>`).join("")}</div><button class="btn green">💾 Simpan</button></div></section>
+    <section class="page" data-page="running"><div class="simple-panel"><h2>Running Text</h2><textarea id="runText" rows="7"></textarea><br><button class="btn green" onclick="saveRun()">💾 Simpan</button></div></section>
+    <section class="page" data-page="imam"><div class="simple-panel"><h2>Imam & Muadzin</h2><p>Kelola petugas imam dan muadzin.</p></div></section>
+    <section class="page" data-page="audio"><div class="simple-panel"><h2>Adzan & Audio</h2><p>Kelola audio adzan dan pengaturan suara.</p></div></section>
+    <section class="page" data-page="gallery"><div class="simple-panel"><h2>Galeri</h2><p>Kelola foto kegiatan Masjid ARAFAH.</p></div></section>
+    <section class="page" data-page="settings"><div class="simple-panel"><h2>Pengaturan</h2><label>Nama Masjid</label><input id="mosqueInput" value="MASJID ARAFAH"><label>Lokasi</label><input id="locInput" value="Kranji Munthang"><button class="btn green" onclick="saveSettings()">💾 Simpan Pengaturan</button></div></section>
+    <section class="page" data-page="users"><div class="simple-panel"><h2>Pengguna</h2><p>Admin Masjid · Super Admin</p></div></section>
+    <section class="page" data-page="logs"><div class="simple-panel"><h2>Log Aktivitas</h2><p>Riwayat aktivitas administrator akan ditampilkan di sini.</p></div></section>
+  </div>
+</section>
+</main>
+</div>
+<script src="admin.js"></script>
+</body></html>
